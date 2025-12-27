@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio website</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="my_pic.png">
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    --bg-color: #081b29;
+    --main-color: #ea5f30;
+    --text-color: #333;
+    --second-text-color: #555;
+    --white-color: #fff;
+    --cover-color: linear-gradient(45deg, #972f0d, #ea5f30);
+    --pages-color: linear-gradient(90deg, #fff, #eeeeee);
+    --border: 0.125rem solid #ea5f30;
+    --box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.2);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+.wrapper {
+    position: relative;
+    width: 66rem;
+    height: 45rem;
+    padding: 2rem;
+    perspective: 250rem;
+    animation: show-animate 2s forwards;
+}
+
+@keyframes show-animate {
+    0%,
+    30% {
+        opacity: 0;
+        transform: rotate(-20deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+
+.cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: var(--cover-color);
+    box-shadow: var(--box-shadow);
+    border-top-left-radius: 0.6rem;
+    border-bottom-left-radius: 0.6rem;
+    transform-origin: right;
+}
+
+.cover.cover-left {
+    z-index: -1;
+}
+
+.cover.cover-right {
+    z-index: 100;
+    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.cover.cover-right.turn {
+    transform: rotateY(180deg);
+}
+
+.book {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    perspective: 250rem;
+}
+
+.book .book-page {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: var(--pages-color);
+    box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.1);
+    display: flex;
+    padding: 2rem;
+}
+
+.book.page-left {
+    box-shadow: -0.6rem 0.6rem 0.6rem rgba(0, 0, 0, 0.1);
+}
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-page img {
+    min-height: 50px;
+    min-width: 180px;
+    margin-bottom: 0.8rem;
+}
+
+.profile-page h1 {
+    font-size: 2.7rem;
+    line-height: 1;
+}
+
+.profile-page h3 {
+    font-size: 1.3rem;
+    color: #ea5f30;
+}
+
+.profile-page .social-media {
+    margin: 0.6rem 0 0.8rem;
+}
+
+.profile-page .social-media a {
+    display: inline-flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: var(--border);
+    border-radius: 50%;
+    font-size: 1.3rem;
+    color: #ea5f30;
+    margin: 0.2rem;
+    transition: 0.5s;
+}
+
+.profile-page .social-media a:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+.profile-page p {
+    text-align: justify;
+}
+
+.profile-page .btn-box {
+    margin-top: 1.2rem;
+}
+
+.btn {
+    display: inline-flex;
+    width: 9.5rem;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+    background: #ea5f30;
+    border: var(--border);
+    border-radius: 0.3rem;
+    font-size: 0.9rem;
+    color: var(--white-color);
+    font-weight: 500;
+    margin: 0 1rem;
+    transition: 0.5s;
+}
+
+.btn:hover {
+    background: transparent;
+    color: var(--main-color);
+}
+
+.btn-box .btn:nth-child(2) {
+    background: transparent;
+    color: var(--main-color);
+}
+
+.btn-box .btn:nth-child(2):hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+.book-page.page-right {
+    position: absolute;
+    right: 0;
+    transform-style: preserve-3d;
+    padding: 1.5rem 2rem;
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.book-page.page-right.turn {
+    transform: rotateY(-180deg);
+}
+
+.book-page .page-front,
+.book-page .page-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--pages-color);
+    padding: 1.5rem 2rem;
+}
+
+.book-page .page-front {
+    transform: rotateY(0deg) translateZ(1px);
+}
+
+.book-page .page-back {
+    transform: rotateY(180deg) translateZ(1px);
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.edu-box {
+    border-left: var(--border);
+}
+
+.edu-box .edu-content {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 1.2rem;
+}
+
+.edu-box .edu-content p {
+    font-size: small;
+}
+
+.edu-box .edu-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -0.65rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: var(--main-color);
+    border-radius: 50%;
+}
+
+.edu-content .year {
+    color: var(--main-color);
+}
+
+.edu-content .year i {
+    margin-right: 0.4rem;
+}
+
+.number-page {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nextprev-btn {
+    position: absolute;
+    bottom: 0.9rem;
+    right: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--second-text-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.nextprev-btn:hover {
+    color: var(--main-color);
+}
+
+.nextprev-btn.back {
+    left: 1.5rem;
+}
+
+.services-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.services-box .services-content {
+    flex: 1 1 10rem;
+    border: var(--border);
+    border-radius: 0.5rem;
+    text-align: center;
+    font-size: small;
+    padding: 0.8rem 0.5rem 1.1rem;
+    transition: 0.3s ease;
+}
+
+.services-box .services-content:hover {
+    box-shadow: var(--box-shadow);
+}
+
+.services-content i {
+    font-size: 1.4rem;
+    color: var(--main-color);
+}
+
+.services-content h3 {
+    font-size: 1.1rem;
+}
+
+.services-content p {
+    margin: 0.1rem;
+}
+
+.skill-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-box .skill-content {
+    flex: 1 1 20rem;
+}
+
+.skill-content {
+    line-height: 1;
+    margin-bottom: 0.6rem;
+    font-size: smaller;
+}
+
+.skill-content .content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.skill-content .content span {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.3rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.skill-content .content span:hover {
+    box-shadow: var(--box-shadow);
+}
+
+.skill-content .content span i {
+    font-size: 1.3rem;
+    color: var(--main-color);
+}
+
+.contact-box {
+    text-align: center;
+}
+
+.contact-box .field {
+    width: 100%;
+    background: transparent;
+    border: var(--border);
+    border-radius: 0.3rem;
+    padding: 0.8rem;
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.contact-box .field::placeholder {
+    color: var(--text-color);
+}
+
+.contact-box textarea {
+    resize: none;
+    height: 15rem;
+}
+
+.contact-box .btn {
+    cursor: pointer;
+}
+
+.back-profile {
+    position: absolute;
+    bottom: 1.2rem;
+    right: 2rem;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: var(--border);
+    border-radius: 0.3rem;
+    font-size: 1.1rem;
+    color: var(--main-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.back-profile:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+.back-profile p {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(0.5);
+    font-size: 1rem;
+    color: var(--main-color);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.back-profile:hover p {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    top: -1.8rem;
+}
+</style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="cover cover-left"></div>
+        <div class="cover cover-right"></div>
+
+        <div class="book">
+            <div class="book-page page-left">
+                <div class="profile-page">
+                    <img src="my_pic.png" alt="">
+                    <h1>ARUNKUMAR E</h1>
+                    <h3>Senior Process Lead</h3>
+
+                    <div class="social-media">
+                        <a href="#" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                        <a href="#" target="_blank"><i class='bx bxl-github' ></i></a>
+                    
+                    </div>
+
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, facere pariatur ipsam voluptatem quas dolore libero perferendis, dolores animi sed laudantium ipsa. Quaerat, dolorem blanditiis debitis libero officia veritatis cumque?
+                    </p>
+
+                    <div class="btn-box">
+                        <a href="#" class="btn">Download Resume</a>
+                        <a href="#" class="btn contact-me">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- page 2 & page 3 -->
+            <div class="book-page page-right turn" id="turn-1">
+                <!-- 2nd page (education page)  -->
+                <div class="page-front">                    
+                    <h1 class="title">EDUCATION</h1>
+                    <div class="edu-box">
+                        <div class="edu-content">
+                            <span class="year"><i class='bx bxs-calendar'></i>2004 - 2008</span>
+                            <h3>B. Tech in Information Technology</h3>
+                            <p>Madha Engineering College</p>
+                            <p>Anna University</p>
+                            <p>Aggregrate: 70%</p>
+                        </div>
+
+                        <div class="edu-content">
+                            <span class="year"><i class='bx bxs-calendar'></i>2003 - 2004</span>
+                            <h3>Higher Secondary</h3>
+                            <p>Rajkumar Sulochana Matriculation School</p>
+                            <p>Matriculation Board</p>
+                            <p>Aggregrate: 83%</p>
+                        </div>
+                    </div>
+                    
+                    <span class="number-page">1</span>
+                    <span class="nextprev-btn" data-page="turn-1">
+                        <i class='bx bxs-chevron-right'></i>
+                    </span>
+                </div>
+                
+
+
+                <div class="page-back">
+                    <!-- 3rd page (project page-1)  -->
+                    <h1 class="title">WORK EXPERIENCE</h1>
+
+                    <div class="edu-box">
+                        <div class="edu-content">
+                           <span class="year"><i class='bx bxs-calendar'></i>2014 - 2025</span>
+                            <h3>Infosys BPM Ltd</h3>
+                            <p>Senior Process Lead</p>
+                            <p>Web Content Management</p>
+                            
+                            
+                        </div>
+
+                        <div class="edu-content">
+                            <span class="year"><i class='bx bxs-calendar'></i>2010 - 2014</span>
+                            <h3>Develop Scripts LLC</h3>
+                            <p>Project Analyst</p>
+                            <p>Graphic and Web Designer</p>
+                            
+                        </div>
+                        
+
+                        <span class="number-page">2</span>
+
+                        <span class="nextprev-btn back" data-page="turn-1">
+                            <i class='bx bxs-chevron-left'></i>
+                        </span>
+                    </div>
+
+                </div>
+            </div> 
+
+            <!-- page 4 & page 5 -->
+            <div class="book-page page-right turn " id="turn-2">
+                <!-- 4th page (project page 2)  -->
+                <div class="page-front">
+
+                    <div class="edu-box">
+                        <div class="edu-content">
+                            <h3>Infosys BPM Ltd</h3>
+                            <p>Started as Senior Process Associate for an Austrailian Client</p>
+                            <p>Creating and Publishing basic and professional websites</p>
+                            <p>Moved into new project for US based Client</p>
+                            <p>Building customer landing pages using HTML and CSS</p>
+                            <p>Quickly got trained on the project and became Subject Matter Expert</p>
+                            <p>Got promoted to Process Lead within a year</p>
+                            <p>Started with a small team for Small and Medium Business websites</p>
+                            <p>Promoted as Senior Process Lead in 2022 and taking care of 30 plus team members</p>                            
+                        </div>
+
+                        <div class="edu-content">
+                            <h3>Develop Scripts LLC</h3>
+                            <p>Started as web and graphic designer building templates</p>
+                            <p>Developed skills as requirement analyst</p>
+                            <p>Connected with US based clients for various small projects</p>
+                            <p>Acted as front end designer and delivering finished templates to developers</p>
+                            <p>Also part of delivery management for finished web sites and projects</p>
+                            
+                        </div>
+                        
+
+                        <span class="number-page">3</span>
+
+                        <span class="nextprev-btn" data-page="turn-2">
+                            <i class='bx bxs-chevron-right'></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="page-back">
+                    <!-- 5th page my services page  -->
+                    <h1 class="title">My Skills</h1>
+                    <div class="skill-box">
+                        <div class="skill-content">
+                            <h3>Languages</h3>
+                            <div class="content">
+                                <span><i class='bx bxl-python'></i>Python,</span>
+                                <span><i class='bx bxl-html5' ></i>HTML,</span>
+                                <span><i class='bx bxl-css3' ></i>CSS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-content">
+                            <h3>Libraries</h3>
+                            <div class="content">
+                                <span><i class='bx bxl-python'></i>Python Libraries</span>
+                            </div>
+                        </div>
+                            
+                        <div class="skill-content">
+                            <h3>Web Dev Tools</h3>
+                            <div class="content">
+                                <span><i class='bx bx-code-block'></i> Let Code,</span>
+                                <span><i class='bx bxl-git'></i>  Git,</span>
+                                <span><i class='bx bxl-github'></i>  GitHub,</span>
+                                <span><i class='bx bxl-django' ></i> AEM</span>
+                                <span><i class='bx bxl-django' ></i> Wordpress</span>
+                                <span><i class='bx bxl-django' ></i> SANITY IO</span>
+                                
+                              </div>
+                        </div>
+                            
+                        <div class="skill-content">
+                            <h3>Areas of Interest</h3>
+                            <div class="content">
+                                <span><i class='bx bxs-paint'></i> UI/UX Designing,</span>
+                                <span><i class='bx bx-paint'></i> Graphics Designing</span>                              
+                            </div>
+                        </div>
+                            
+                        
+                            
+                        </div>
+                        
+                    
+
+                    <span class="number-page">4</span>
+
+                        <span class="nextprev-btn back" data-page="turn-2">
+                            <i class='bx bxs-chevron-left'></i>
+                        </span>
+                </div> 
+            </div>
+
+            <div class="book-page page-right turn" id="turn-3">
+                <!-- 4th page (project page 2)  -->
+                <div class="page-front">
+                    <h1 class="title">Soft Skills</h1>
+
+                    <div class="services-box">
+                        <div class="services-content">
+                            <i class='bx bx-code-alt'></i>
+                            <h3>Web Development</h3>
+                            <p>Elevate your online presence with custom web solutions tailored to your unique brand and business needs.</p>
+                        </div>
+
+                        <div class="services-content">
+                            <i class='bx bxl-android'></i>
+                            <h3>Android/Ios Development</h3>
+                            <p>Crafting cutting-edge mobile experiences for Android and iOS platforms, ensuring seamless functionality and user engagement.</p>
+                        </div>
+
+                        <div class="services-content">
+                            <i class='bx bxs-data'></i>
+                            <h3>Database Creation and Management</h3>
+                            <p>Efficient Database Creation and Management for Seamless Data Organization and Accessibility.</p>
+                        </div>
+
+                        <div class="services-content">
+                            <i class='bx bxs-paint'></i>
+                            <h3>Creative Design Solutions</h3>
+                            <p>Innovative Graphic Design Solutions: Transforming Ideas into Visually Stunning Realities.
+                            </p>
+                        </div>
+                    </div>
+
+
+
+
+                        <span class="number-page">5</span>
+
+                        <span class="nextprev-btn" data-page="turn-3">
+                            <i class='bx bxs-chevron-right'></i>
+                        </span>
+                    </div> 
+                    
+                    <div class="page-back">
+                        <!-- 7th page my services page  -->
+                        <h1 class="title">Contact ME!</h1>
+    
+                        <div class="contact-box">
+                            <form action="" method="POST">
+                                <input type="text" class="field" placeholder="Full Name" required>
+                                <input type="email" class="field" placeholder="Email" required>
+                                <textarea name=" " id="" cols="30" rows="10" class="field" placeholder="Message"></textarea>
+                                <input type="submit" class="btn" value="Send">
+                            </form>
+                        </div>
+
+                        <span class="number-page">6</span>
+
+                        <span class="nextprev-btn back" data-page="turn-3">
+                            <i class='bx bxs-chevron-left'></i>
+                        </span> 
+
+                        <a href="" class="back-profile">
+                            <p>Profile</p>
+                            <i class='bx bxs-user'></i>
+                        </a>
+                    </div>
+                </div>
+
+                               
+            </div>  
+        </div>
+    </div>
+
+
+    <script>
+        const pageTurnBtn = document.querySelectorAll(".nextprev-btn");
+
+pageTurnBtn.forEach((el, index) => {
+    el.onclick = () => {
+        const pageTurnId = el.getAttribute("data-page");
+        const pageTurn = document.getElementById(pageTurnId);
+
+        if (pageTurn.classList.contains("turn")) {
+            pageTurn.classList.remove("turn");
+            setTimeout(() => {pageTurn.style.zIndex = 20 - index;}, 500);            
+                
+        } else {
+            pageTurn.classList.add("turn");
+            setTimeout(() => {pageTurn.style.zIndex = 20 + index;}, 500);
+        }
+    };
+});
+
+const pages = document.querySelectorAll(".book-page.page-right");
+const contactMeBtn = document.querySelector(".btn.contact-me");
+
+contactMeBtn.onclick = () => {
+    pages.forEach((page, index) => {
+        setTimeout(() => {page.classList.add("turn");
+
+            setTimeout(() => {page.style.zIndex = 20 + index;}, 500);
+        }, (index + 1) * 200 + 100);
+    });
+};
+
+let totalPages = pages.length;
+let pageNumber = 0;
+
+const backProfileButton = document.querySelector(".back-profile");
+
+backProfileButton.onclick = () => {
+    pages.forEach((_, index) => {
+        setTimeout(() => {
+            reverseIndex();
+            pages[pageNumber].classList.remove("turn");
+
+            setTimeout(() => {
+                reverseIndex();
+                pages[pageNumber].style.zIndex = 10 + index;
+            }, 500);
+        }, (index + 1) * 200 + 100);
+    });
+};
+
+function reverseIndex() {
+    pageNumber--;
+    if (pageNumber < 0) {
+        pageNumber = totalPages - 1;
+    }
+}
+
+const coverRight = document.querySelector(".cover.cover-right");
+const pageLeft = document.querySelector(".book-page.page-left");
+
+setTimeout(() => {
+    coverRight.classList.add("turn");
+}, 2100);
+
+setTimeout(() => {
+    coverRight.style.zIndex = -1;
+}, 2800);
+
+setTimeout(() => {
+    pageLeft.style.zIndex = 20;
+}, 3200);
+
+pages.forEach((_, index) => {
+    setTimeout(() => {
+        reverseIndex();
+        pages[pageNumber].classList.remove("turn");
+
+        setTimeout(() => {
+            reverseIndex();
+            pages[pageNumber].style.zIndex = 10 + index;
+        }, 500);
+    }, (index + 1) * 200 + 2100);
+});
+    </script>
+</body>
+</html>
